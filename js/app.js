@@ -21,7 +21,7 @@ function Stores( name, minCustomers, maxCustomers, avgCookies){
   this.cookiesPerHour = [];
   this.avgcookieArray = [];
   this.randomCustomer = []; 
-  // this.cookiesInt = []
+  // this.cookiesInt = [];
     
   Stores.globalStores.push(this)
 
