@@ -6,7 +6,7 @@
 //                             Global Variables
 const tableElem = document.getElementById('store');
 
-let hoursOfOperation = ['6am: ','7am: ','8am: ','9am: ','10am: ','11am: ','12pm: ','1pm: ','2pm: ','3pm: ','4pm: ','5pm: ','6pm: ','7pm: ']
+let hoursOfOperation = ['6am ','7am ','8am ','9am ','10am ','11am ','12pm ','1pm ','2pm ','3pm ','4pm ','5pm ','6pm ','7pm ']
 
 // Replace the lists of your data for each store and build a single table of data instead. It should look similar to the following:
 
@@ -20,6 +20,8 @@ function Stores( name, minCustomers, maxCustomers, avgCookies){
   this.avgCookies = avgCookies;
   this.cookiesPerHour = [];
   this.avgcookieArray = [];
+  this.randomCustomer = []; 
+  // this.cookiesInt = []
     
   Stores.globalStores.push(this)
 
@@ -29,30 +31,34 @@ function Stores( name, minCustomers, maxCustomers, avgCookies){
 
 
 Stores.globalStores = [];
+
   Stores.prototype.randomCustomersPerHour = function (){
-    let randomCustomer = [];    
-    for(let i = 0; i < hoursOfOperation.length; i++){
-      let intRandomCust = Math.floor(Math.random() * this.maxCustomers - this.minCustomers + 1 + this.minCustomers );
-      randomCustomer.push(intRandomCust);
-      
+      for(let i = 0; i < hoursOfOperation.length; i++){
+      let intRandomCust = Math.floor((Math.random() * (this.maxCustomers - this.minCustomers + 1) + this.minCustomers));
+      this.randomCustomer.push(intRandomCust);
     }
-    
-    return randomCustomer;
+    console.log(this.randomCustomer);
+    // return randomCustomer;
     
   }
   
 
 Stores.prototype.cookiesSoldPerHour = function (){
-   let cookiesInt = []
+  let cookiesInt = [];
   for(let j = 0; j < hoursOfOperation.length; j++){
     this.avgcookieArray.push(this.avgCookies += 0)
   }
+  console.log(this.avgcookieArray);
   for(let i = 0; i < hoursOfOperation.length; i++){
-    cookiesInt = Math.floor((this.randomCustomersPerHour()[i] * this.avgcookieArray[i]))
+    cookiesInt = Math.floor((this.randomCustomer[i] * this.avgcookieArray[i]));
     this.cookiesPerHour.push(cookiesInt);
   }
   console.log(this.randomCustomersPerHour());
   }
+
+//                   total sales per store per day
+
+
 
 Stores.prototype.renderStores = function(bodyElem){
   let totalSales = 0;
@@ -73,6 +79,9 @@ Stores.prototype.renderStores = function(bodyElem){
   trowElem.appendChild(totalSalesElem);
 
 }
+
+
+
 
 // Each cookie stand location should have a separate render() method that creates and appends its row to the table
 
@@ -106,14 +115,44 @@ function renderAllStores() {
   }
 }
 
-const seattle = new Stores( 'Seattle',23, 65, 6.3,);
-const tokyo = new Stores('Tokyo',3, 24, 1.2, );
-const Ddubai = new Stores('Dubai', 11 ,38 ,3.7);
+
+function renderFooter(){
+  const footerElem = makeHtmlElem('tfoot', tableElem, null);
+  const rowElem = makeHtmlElem('tr', footerElem,null);
+  makeHtmlElem('th', rowElem, 'Total per Hour');
+  let totalPerHour = 0;
+  let finalTotal = 0;
+  for(let i = 0; i < hoursOfOperation.length; i++){
+    for(let j = 0; j < Stores.globalStores.length; j++){
+      let storeSalesThisHour = Stores.globalStores[j].cookiesPerHour[i];
+      totalPerHour += storeSalesThisHour;
+    }
+    makeHtmlElem('th', rowElem,totalPerHour);
+    finalTotal += totalPerHour;
+    totalPerHour = 0;
+  }
+
+  makeHtmlElem('th', rowElem, finalTotal);
+
+
+}
+
+
+
+
+
+
+
+
+const seattle = new Stores( 'Seattle',23, 65, 6.3);
+const tokyo = new Stores('Tokyo',3, 24, 1.2 );
+const dubai = new Stores('Dubai', 11 ,38 ,3.7);
 const paris = new Stores('Paris' ,20 , 38, 2.3);
 const lima = new Stores('Lima',2 , 16, 4.6, );
 console.log(seattle);
 renderHeader();
 renderAllStores();
+renderFooter();
 
 
 // The header row and footer row are each created in their own stand-alone function
