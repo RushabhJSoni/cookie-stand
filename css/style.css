@@ -36,11 +36,79 @@ header h1 {
   
 }
 
+ 
+
+
 a {
   color: #2b2301;
   text-decoration: none;
   
 }
+
+#main {
+  display: flex;
+ border:  1px transparent #2b2301;
+
+}
+
+
+#section1{
+ padding: 20px;
+  font-family: 'Courgette', cursive;
+}
+
+#section1 p{
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 10px;
+}
+
+main img{
+  width: 200px;
+  height: 200px;
+  float: left;
+  padding-top: 60px;
+  padding-right: 80px;
+}
+
+#tabel1 caption{
+  font-family: monospace;
+  padding-top: 80px;
+  padding-bottom: 10px;
+  font-size: medium;
+}
+#tabel1  {
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 70px;
+  font-size: 10px;
+  width: 100%;
+  padding: 10%;
+  text-align: center;
+  align-self: unset;
+  padding-left: 50px;
+}
+
+#tabel1 td, #tabel1 th {
+  border: 1px dotted black;
+  text-align: center;
+  padding:10px;
+}
+
+#section2 {
+  align-self: flex-end;
+}
+#section2 h2{
+  font-family: 'Courgette', cursive;
+  font-size: medium;
+   padding: 10px;
+}
+
+#section2 img{
+  width: 200px;
+  height: 200px;
+  padding: 10px;
+}
+ 
 
 footer{
   width: 100%;
