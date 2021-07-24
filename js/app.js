@@ -33,20 +33,25 @@ function Stores(name, minCustomers, maxCustomers, avgCookies) {
 Stores.globalStores = [];
 
 Stores.prototype.randomCustomersPerHour = function () {
+  console.log(this);
   for (let i = 0; i < hoursOfOperation.length; i++) {
+    
     let intRandomCust = Math.floor((Math.random() * (this.maxCustomers - this.minCustomers + 1) + this.minCustomers));
     this.randomCustomer.push(intRandomCust);
+    
   }
+  
 }
 
 
 Stores.prototype.cookiesSoldPerHour = function () {
 
   for (let i = 0; i < hoursOfOperation.length; i++) {
+    
     this.cookiesPerHour.push(Math.floor(this.avgCookies * this.randomCustomer[i]))
   }
 
-  console.log(this.cookiesPerHour);
+  // console.log(this.cookiesPerHour);
 
 }
 
@@ -104,6 +109,7 @@ function renderAllStores() {
   const bodyElem = makeHtmlElem('tbody', tableElem, null);
   for (let i = 0; i < Stores.globalStores.length; i++) {
     let currentStore = Stores.globalStores[i];
+    console.log(currentStore);
     currentStore.randomCustomersPerHour();
     currentStore.cookiesSoldPerHour();
     currentStore.renderStores(bodyElem);
@@ -138,13 +144,15 @@ function handleSubmit(e) {
   e.preventDefault();
 
   console.log(e);
- bm 
+  
   let name = e.target.storeName.value;
-  let minCustomers = e.target.minCust.value;
-  let maxCustomers = e.target.maxCust.value;
-  let avgCookies = e.target.avgCookie.value;
+  let minCustomers = parseInt(e.target.minCust.value);
+  let maxCustomers = parseInt(e.target.maxCust.value);
+  let avgCookies =parseInt(e.target.avgCookie.value);
 
-  new Stores(name, minCustomers, maxCustomers, avgCookies);
+  let newStore = new Stores(name, minCustomers, maxCustomers, avgCookies);
+  console.log(newStore);
+  
   tableElem.innerHTML = '';
   renderHeader();
   renderAllStores();
@@ -168,7 +176,7 @@ new Stores('Seattle', 23, 65, 6.3);
 new Stores('Tokyo', 3, 24, 1.2);
 new Stores('Dubai', 11, 38, 3.7);
 new Stores('Paris', 20, 38, 2.3);
-new Stores('Lima', 2, 16, 4.6,);
+new Stores('Lima', 2, 16, 4.6);
 
 renderHeader();
 renderAllStores();
