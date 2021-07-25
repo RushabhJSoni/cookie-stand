@@ -21,6 +21,7 @@ header img {
   text-align: center;
   margin-right: 30px;
   
+  
 }
 
 header nav li {
@@ -46,15 +47,19 @@ a {
 }
 
 #main {
-  display: flex;
- border:  1px transparent #2b2301;
-
+ height: 800px;
 }
 
 
 #section1{
  padding: 20px;
+  
+  display: flex;
+}
+
+#section1 h2 {
   font-family: 'Courgette', cursive;
+  padding: 30px;
 }
 
 #section1 p{
@@ -65,9 +70,10 @@ a {
 main img{
   width: 200px;
   height: 200px;
-  float: left;
   padding-top: 60px;
   padding-right: 80px;
+  justify-content: l;
+  flex-wrap: wrap;
 }
 
 #tabel1 caption{
@@ -75,17 +81,19 @@ main img{
   padding-top: 80px;
   padding-bottom: 10px;
   font-size: medium;
+  
 }
 #tabel1  {
-  margin-left: 10px;
+  margin-left: 50px;
   margin-right: 10px;
+  margin-top: 0px;
   height: 70px;
   font-size: 10px;
   width: 100%;
   padding: 10%;
   text-align: center;
   align-self: unset;
-  padding-left: 50px;
+ 
 }
 
 #tabel1 td, #tabel1 th {
